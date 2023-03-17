@@ -9,7 +9,8 @@ namespace ArraySums
             // Variables
             float[,] matrix;
             int rows, cols;
-            float sumOfMeans = 0;
+            float[] sumOfRows;
+            float[] sumOfCols;
 
             // Ask user for array dimensions
             Console.WriteLine("Number of rows: ");
@@ -22,34 +23,46 @@ namespace ArraySums
             matrix = new float[rows, cols];
 
             // Ask the user for a number to put in each position
-            for (int r = 0; r < matrix.GetLength(0); r++)
+            for (int r = 0; r < rows; r++)
             {
-                for (int c = 0; c < matrix.GetLength(1); c++)
+                for (int c = 0; c < cols; c++)
                 {
-                    string aux;
                     Console.WriteLine($"Value in ({r}, {c}): ");
-                    aux = Console.ReadLine();
-                    matrix[r, c] = float.Parse(aux);
+                    matrix[r, c] = float.Parse(Console.ReadLine());
                 }
             }
 
-            // Calculate the mean of the values and show it
-            for (int r = 0; r < matrix.GetLength(0); r++)
+            // Calculate the sum of the rows and show it
+            sumOfRows = new float[rows];
+
+            for (int r = 0; r < rows; r++)
             {
-                float aux = 0;
+                float rowSum = 0;
 
-                for (int c = 0; c < matrix.GetLength(1); c++)
+                for (int c = 0; c < cols; c++)
                 {
-                    aux += matrix[r, c];
+                    rowSum += matrix[r, c];
                 }
 
-                aux /= matrix.GetLength(1);
-                Console.WriteLine($"Mean of row {r} : {aux}");
-                sumOfMeans += aux;
+                Console.WriteLine($"Sum of row {r} : {rowSum}");
+                sumOfRows[r] = rowSum;
             }
 
-            // Calculate the sum of the means and show it
-            Console.WriteLine($"Sum of means is {sumOfMeans}");
+            // Calculate the sum of the cols and show it
+            sumOfCols = new float[cols];
+
+            for (int c = 0; c < cols; c++)
+            {
+                float colSum = 0;
+
+                for (int r = 0; r < rows; r++)
+                {
+                    colSum += matrix[r, c];
+                }
+
+                Console.WriteLine($"Sum of col {c} : {colSum}");
+                sumOfCols[c] = colSum;
+            }
         }
     }
 }
