@@ -16,21 +16,26 @@ namespace PlayerPerks
                 switch (c)
                 {
                     case 'w':
-                        perks |= Perks.WaterBreathing;
+                        perks ^= Perks.WaterBreathing;
                         break;
                     case 'a':
-                        perks |= Perks.AutoHeal;
+                        perks ^= Perks.AutoHeal;
                         break;
                     case 's':
-                        perks |= Perks.Stealth;
+                        perks ^= Perks.Stealth;
                         break;
                     case 'd':
-                        perks |= Perks.DoubleJump;
+                        perks ^= Perks.DoubleJump;
                         break;
                     default:
                         Console.WriteLine("Unknown perk!");
                         return;
                 }
+            }
+
+            if ((perks & Perks.AutoHeal) != Perks.AutoHeal)
+            {
+                Console.WriteLine("Not gonna make it!");
             }
 
             if (perks == 0)
@@ -62,11 +67,6 @@ namespace PlayerPerks
             if ((perks & (Perks.Stealth | Perks.DoubleJump)) == (Perks.Stealth | Perks.DoubleJump))
             {
                 Console.WriteLine("Silent jumper!");
-            }
-
-            if ((perks & Perks.AutoHeal) != Perks.AutoHeal)
-            {
-                Console.WriteLine("Not gonna make it!");
             }
         }
     }
